@@ -29,8 +29,9 @@ export function Login() {
   });
 
   const onSubmit = async (data) => {
+
     try {
-      const { status } = await api.post('/session', {
+      const { status, data: { token } } = await api.post('/session', {
         email: data.email,
         password: data.password,
       },
@@ -43,6 +44,7 @@ export function Login() {
           navigate('/');
         }, 2000);
         toast.success('Seja Bem-vindo(a) 😁');
+        localStorage.setItem('token', token);
       } else {
         throw new Error();
 
@@ -51,7 +53,6 @@ export function Login() {
     } catch (error) {
       toast.error('Email ou senha Incorretos 🤯')
     }
-
 
   }
 
