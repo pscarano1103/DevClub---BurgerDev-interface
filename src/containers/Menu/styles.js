@@ -10,7 +10,7 @@ export const Container = styled.div`
   background:
     linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
     url('${Background}');
-  background-size: repeat;
+  background-size: cover;
 `;
 
 export const Banner = styled.div`
@@ -73,4 +73,22 @@ export const ProductsContainer = styled.div`
   justify-content: center;
   max-width: 1280px;
   margin: 50px auto 0;
+`;
+
+export const BackButtton = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #696969;
+  text-transform: uppercase;
+  margin-top: 10px;
+
+  &:hover {
+    color: #9758a6;
+  }
 `;

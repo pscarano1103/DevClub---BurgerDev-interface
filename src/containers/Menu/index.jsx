@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+  BackButtton,
   Banner,
   CategoriesMenu,
   CategoryButton,
@@ -101,6 +102,16 @@ export function Menu() {
           <CardProduct product={product} key={product.id} />
         ))}
       </ProductsContainer>
+
+      <BackButtton
+        onClick={() => {
+          navigate({
+            pathname: '/',
+          });
+        }}
+      >
+        voltar
+      </BackButtton>
     </Container>
   );
 }
