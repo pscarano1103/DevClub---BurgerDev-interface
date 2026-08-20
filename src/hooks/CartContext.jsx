@@ -33,7 +33,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const deleteProduct = (productId) => {
-    const newCart = cartProducts.filter((prd) => prd.id !== product.id);
+    const newCart = cartProducts.filter((prd) => prd.id !== productId);
     setCartProducts(newCart);
     updateLocalStorage(newCart);
   };
@@ -50,7 +50,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const decreaseProduct = (productId) => {
-    const cartIndex = cartProducts.findIndex((prd) => prd.id === product.id);
+    const cartIndex = cartProducts.findIndex((prd) => prd.id === productId);
 
     if (cartProducts[cartIndex].quantity > 1) {
       const newCart = cartProducts.map((prd) => {
