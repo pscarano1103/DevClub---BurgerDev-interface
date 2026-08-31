@@ -1,25 +1,74 @@
+import { toast } from 'react-toastify';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { api } from '../../services/api';
+import { formatPrice } from '../../utils/formatPrice';
+import { useCart } from '../../hooks/CartContext';
 import { Button } from '../Button';
 import { Container } from './styles';
 
 export function CartResume() {
+  const [finalPrice, setFinalPrice] = useState(0);
+  const [deliveryTax] = useState(500);
+  const { cartProducts, clearCart } = useCart();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const sumAllItens = cartProducts.reduce((acc, current) => {
+      return current.price * current.quantity + acc;
+    }, 0);
+
+    setFinalPrice(sumAllItens);
+  }, [cartProducts]);
+
+  const submitOrder = async () => {
+    const products = cartProducts.map((product) => {
+      return { id: product.id, quantity: product.quantity };
+    });
+
+    try {
+      const { status } = await api.post(
+        '/orders',
+        { products },
+        {
+          validateStatus: () => true,
+        },
+      );
+
+      if (status === 200 || status === 201) {
+        setTimeout(() => {
+          navigate('/');
+        }, 2000);
+        toast.success('Pedido realizado com sucesso!');
+        clearCart();
+      } else if (status === 409) {
+        toast.error('Falha ao realizar seu pedido!');
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      toast.error('😭 Falha no sistema! Tente novamente');
+    }
+  };
   return (
     <div>
       <Container>
         <div className="container-top">
           <h2 className="title">Resumo do pedido</h2>
           <p className="itens">Itens</p>
-          <p className="itens-price">R$ 20,00</p>
+          <p className="itens-price">{formatPrice(finalPrice)}</p>
           <p className="delivery-tax">Taxa de entrega</p>
-          <p className="delivery-tax-price">R$ 5,00</p>
+          <p className="delivery-tax-price">{formatPrice(deliveryTax)}</p>
         </div>
 
         <div className="container-bottom">
           <p>Total</p>
-          <p>R$ 25,00</p>
+          <p>{formatPrice(finalPrice + deliveryTax)}</p>
         </div>
       </Container>
 
-      <Button>Finalizar Pedido</Button>
+      <Button onClick={submitOrder}>Finalizar Pedido</Button>
     </div>
   );
 }
