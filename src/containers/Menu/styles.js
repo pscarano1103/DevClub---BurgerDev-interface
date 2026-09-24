@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export const Container = styled.div`
   width: 100%;
   min-height: 100vh;
-  background-color: #f0f0f0;
+  background-color: ${(props) => props.theme.secondWhite};
   background:
     linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
     url('${Background}');
@@ -23,22 +23,22 @@ export const Banner = styled.div`
   position: relative;
 
   background: url('${BannerHamburger}') no-repeat;
-  background-color: #1f1f1f;
+  background-color: ${(props) => props.theme.mainBlack};
   background-size: cover;
   background-position: center;
 
   h1 {
-    font-family: 'Road Rage', sans-serif;
+    font-family: ${(props) => props.theme.roadRageFont};
     font-size: 80px;
     line-height: 65px;
-    color: #fff;
+    color: ${(props) => props.theme.white};
     position: absolute;
     right: 20%;
     top: 30%;
 
     span {
       display: block;
-      color: #fff;
+      color: ${(props) => props.theme.white};
       font-size: 20px;
       font-weight: 400;
     }
@@ -56,13 +56,17 @@ export const CategoryButton = styled(Link)`
   text-decoration: none;
   cursor: pointer;
   background: none;
-  color: ${(props) => (props.$isActiveCatergory ? '#9758a6' : '#696969')};
+  color: ${(props) =>
+    props.$isActiveCatergory
+      ? (props) => props.theme.purple
+      : (props) => props.theme.darkGray};
   font-size: 24px;
   font-weight: 500;
   padding-bottom: 5px;
   line-height: 20px;
   border: none;
-  border-bottom: ${(props) => props.$isActiveCatergory && '3px solid #9758a6'};
+  border-bottom: ${(props) =>
+    props.$isActiveCatergory && `3px solid ${(props) => props.theme.purple}`};
 `;
 
 export const ProductsContainer = styled.div`
@@ -84,11 +88,11 @@ export const BackButtton = styled(Link)`
   font-weight: 600;
   letter-spacing: 1px;
   text-decoration: none;
-  color: #696969;
+  color: ${(props) => props.theme.darkGray};
   text-transform: uppercase;
   margin-top: 10px;
 
   &:hover {
-    color: #9758a6;
+    color: ${(props) => props.theme.purple};
   }
 `;
