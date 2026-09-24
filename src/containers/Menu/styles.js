@@ -10,7 +10,7 @@ export const Container = styled.div`
   background:
     linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
     url('${Background}');
-  background-size: cover;
+  background-size: contain;
 `;
 
 export const Banner = styled.div`
