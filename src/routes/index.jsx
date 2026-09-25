@@ -7,8 +7,10 @@ import {
   Cart,
   CompletePayment,
   Checkout,
+  Admin,
 } from '../containers';
 import { UserLayout } from '../layouts/UserLayout';
+import { AdminLayout } from '../layouts/AdminLayout';
 
 export function Router() {
   return (
@@ -19,6 +21,13 @@ export function Router() {
         <Route path="/carrinho" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/complete" element={<CompletePayment />} />
+      </Route>
+
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin/pedidos" element={<Admin />} />
+        <Route path="/admin/novo-produto" element={<Admin />} />
+        <Route path="/admin/editar-produto" element={<Admin />} />
+        <Route path="/admin/produtos" element={<Admin />} />
       </Route>
 
       <Route path="/login" element={<Login />} />
