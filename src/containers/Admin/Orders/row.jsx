@@ -16,7 +16,7 @@ import { ProductImage, SelectStatus } from './styles';
 import { orderStatusOptions } from './orderStatus';
 import { api } from '../../../services/api';
 
-export function Row(row, setOrders, orders) {
+export function Row({ row, setOrders, orders }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
