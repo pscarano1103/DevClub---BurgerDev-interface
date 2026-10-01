@@ -14,7 +14,7 @@ export const navLinks = [
     icon: <ListIcon />,
   },
   {
-    id: 2,
+    id: 3,
     label: 'Adicionar Produto',
     path: '/admin/novo-produto',
     icon: <ListPlusIcon />,
